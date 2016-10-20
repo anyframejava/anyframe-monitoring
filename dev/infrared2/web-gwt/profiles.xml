@@ -1,0 +1,20 @@
+<profilesXml>
+  <profiles>
+      <profile>
+        <id>monitoringConfig</id>
+      	<properties>
+      		<gwt.version>1.4.60</gwt.version>
+      		<run.target>net.sf.infrared2.gwt.InfraredApplication/InfraredApplication.html</run.target>
+      		<compile.target1.name>net.sf.infrared2.gwt.InfraredApplication</compile.target1.name>
+      		<compile.target1.value>gwt</compile.target1.value>
+              <extra.Jvm.args>-Xmx512M</extra.Jvm.args>
+      		<overwrite.generated.classes>true</overwrite.generated.classes>
+      		<generator.destination.package>net.sf.infrared2.gwt.client</generator.destination.package>
+      	</properties>
+      </profile>
+  </profiles>
+  
+  <activeProfiles>
+    <activeProfile>monitoringConfig</activeProfile>
+  </activeProfiles>
+</profilesXml>

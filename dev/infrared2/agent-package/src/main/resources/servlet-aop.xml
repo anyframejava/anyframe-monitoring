@@ -1,0 +1,121 @@
+<!DOCTYPE aspectwerkz PUBLIC
+    "-//AspectWerkz//DTD//EN"
+    "http://aspectwerkz.codehaus.org/dtd/aspectwerkz2.dtd">
+    
+<!--
+ *
+ * Copyright 2005 Tavant Technologies and Contributors
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License")
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ *
+ *
+ * Original Author:  binil.thomas (Tavant Technologies)
+ * Contributor(s):   -;
+ *
+-->
+
+<aspectwerkz>
+    <system id="infrared.system.jdbc">
+         <exclude package="net.sf.infrared.*"/>         
+         <!-- 
+         This works for HSQL and Oracle and is apt for our internal testing; 
+         we should get a list of JDBC drivers (atleast the popular ones); 
+         probably this can be got from Sun site. Plus the community might help
+         us compile this list :-)
+         -->
+         <include package="oracle.*"/>
+         <include package="org.hsqldb.*"/>
+         <include package="com.mysql.jdbc.*"/>
+         
+         <aspect class="net.sf.infrared.aspects.jdbc.JdbcAspect"
+            deployment-model="perJVM">            
+            <pointcut name="getConnection" 
+              expression="execution(public java.sql.Connection+ java.sql.Driver+.connect(..)) 
+                          || execution(public java.sql.Connection+ javax.sql.DataSource+.getConnection(..))"/>            
+            <advice name="aroundGetConnection(StaticJoinPoint sjp)" type="around" bind-to="getConnection"/>
+        </aspect>
+    </system>
+    
+    
+    <!--system id="infrared.system.jdbc.nowrap">
+         <exclude package="net.sf.infrared.*"/>         
+         
+         <include package="oracle.*"/>
+         <include package="org.hsqldb.*"/>
+     
+         <aspect class="net.sf.infrared.aspects.jdbc.NonWrappingJdbcAspect"
+            deployment-model="perJVM">            
+            
+            <pointcut name="simpleSqlExecution(String sql)"
+                expression="execution( public * java.sql.Statement+.execute*(String, ..) ) AND args(sql, ..)"/>
+                
+            <pointcut name="statementOrCallPreparation"
+                expression="execution( public java.sql.PreparedStatement+ java.sql.Connection+.prepareStatement(String, ..) ) 
+                         OR execution( public java.sql.CallableStatement+ java.sql.Connection+.prepareCall(String, ..) ) "/>
+                         
+            <pointcut name="statementOrCallExecution(java.sql.PreparedStatement ps)"
+                expression="( execution( public * java.sql.PreparedStatement+.execute*() ) 
+                           OR execution( public * java.sql.CallableStatement+.execute*() ) )
+                           AND target(ps)"/>
+                           
+            <pointcut name="firstStatementOrCallPreparation(String sql)"
+                expression="statementOrCallPreparation() AND !cflowbelow(statementOrCallPreparation()) AND args(sql)"/>
+                
+            <pointcut name="commit()"
+                expression="execution( public void java.sql.Connection+.commit() )"/>
+                
+            <pointcut name="rollback()"
+                expression="execution( public void java.sql.Connection+.rollback() )"/>
+                
+            <pointcut name="iterateOverResultSet()"
+                expression="execution( public boolean java.sql.ResultSet+.next() )"/>                
+         
+            <advice name="aroundSimpleSqlExecution(StaticJoinPoint sjp, String sql)" 
+                    type="around" bind-to="simpleSqlExecution(sql)"/>
+
+            <advice name="aroundFirstStatementOrCallPreparation(StaticJoinPoint sjp, String sql)" 
+                    type="around" bind-to="firstStatementOrCallPreparation(sql)"/>
+
+            <advice name="aroundStatementOrCallExecution(StaticJoinPoint sjp, java.sql.PreparedStatement ps)" 
+                    type="around" bind-to="statementOrCallExecution(ps)"/>                    
+
+            <advice name="aroundCommit(StaticJoinPoint sjp)" 
+                    type="around" bind-to="commit()"/> 
+                                       
+            <advice name="aroundRollback(StaticJoinPoint sjp)" 
+                    type="around" bind-to="rollback()"/>                     
+           
+            <advice name="aroundIterateOverResultSet(StaticJoinPoint sjp)" 
+                    type="around" bind-to="iterateOverResultSet()"/>                     
+        </aspect>
+    </system-->
+    
+    <system id="infrared.system.web">
+        <exclude package="net.sf.infrared.*"/>
+        
+        <!--
+        This works for Jasper & Weblogic; need to figure out those for other
+        JSP engines 
+        -->
+        <include package="org.apache.jsp.*"/>
+        <include package="jsp_servlet.*"/>
+        
+        <aspect class="net.sf.infrared.aspects.jsp.JspAspect"
+            deployment-model="perJVM">            
+            <pointcut name="jspExecution" 
+              expression="execution(public void javax.servlet.jsp.HttpJspPage+._jspService(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse))"/>
+            <advice name="aroundJspExecution(StaticJoinPoint sjp)" type="around" bind-to="jspExecution"/>
+        </aspect>        
+    </system>        
+</aspectwerkz>

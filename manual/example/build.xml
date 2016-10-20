@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<project name="Example Packaging" default="default" basedir=".">
+	<target name="default">
+		<zip destfile="${basedir}/anyframe.example.monitoring.zip" basedir="${basedir}/anyframe.example.monitoring" update="true" 		
+			excludes="target/**"/>																																	
+	</target>
+</project>

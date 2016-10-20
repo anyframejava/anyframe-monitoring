@@ -1,0 +1,150 @@
+<chapter id="monitoring_introduction">
+	<title>Introduction</title>
+
+	<para>
+		InfraRED는 JavaEE 기반 어플리케이션의 성능을 모니터링할 수 있는 기능을 제공하는 오픈 소스 Performance
+		Tool로써, Aspect를 이용하여 성능 측정을 위한 데이터를 수집하고 데이터 분석 결과를 리포팅해 주는 역할을 수행한다.
+		Anyframe Monitoring Tool은 InfraRED(
+		<ulink url="http://infrared.sourceforge.net/versions/latest/">http://infrared.sourceforge.net</ulink>
+		) 를 기반으로 InfraRED 내에 내재된 다양한 버그들을 조치하고 개선된 UI를 제공한다. 다음에서는
+		Anyframe Monitoring Tool의 근간을 이루는 InfraRED의 기본 구조와 Anyframe Monitoring
+		Tool의 주요 기능에 대해 살펴보기로 한다.
+	</para>
+
+	<section id="monitoring_introduction_sec001">
+		<title>기본 구조</title>
+
+		<para>InfraRED는 다음 그림에서 보는 바와 같이 기본적으로 Agent, Collector, GUI로 구성되어 있다.</para>
+
+		<mediaobject>
+			<imageobject>
+				<imagedata align="center"
+					fileref="../image/monitoring/architecture.png" />
+			</imageobject>
+			<textobject>
+				<phrase>Agent는 원격지 서버에 설치 되고 Collector 는 GUI 와 같이 로컬에 설치 되어 동작 하는 이미지</phrase>
+			</textobject> 
+		</mediaobject>
+
+		<itemizedlist>
+			<listitem>
+				<para>
+					Agent : 모니터링 대상 어플리케이션에서 발생하는 요청을 기반으로 어플리케이션 실행에 관한 데이터를
+					수집하고 통합한 후, Collector에게 전송하는 역할을 수행한다. 
+				</para>
+			</listitem>
+
+			<listitem>
+				<para>
+					Collector : 다양한 Agent로부터 전달받은 데이터를 조합하여 내부 DB에 저장하고 있다.
+				</para>
+			</listitem>
+
+			<listitem>
+				<para>
+					GUI : Collector에게 질의를 던져 사용자에게 수집된 데이터를 다양한 형태로 보여주는 역할을 수행한다. 
+					Anyframe Monitoring Tool은 Ajax 기반의 Google Web Tool kit(GWT)를 	기반으로 보다 편리하고 효율적인 형태의 
+					개선된 UI를 제공한다.
+				</para>
+			</listitem>
+		</itemizedlist>
+	</section>
+
+	<section id="monitoring_introduction_sec002">
+		<title>주요 기능</title>
+
+		<para>다음은 Anyframe Monitoring Tool에 의해 제공되는 주요 기능들이다.</para>
+
+		<informaltable>
+			<caption>주요 기능 - #1</caption>
+			<tgroup cols="2">
+				<colspec colnum="1" colname="col1" colwidth="2*"/>
+				<colspec colnum="2" colname="col2" colwidth="3*"/>		
+				<thead>
+					<row>
+						<entry align="center">주요 기능</entry>
+						<entry align="center">설명</entry>
+					</row>
+				</thead>
+
+				<tbody>
+					<row>
+						<entry>Statistics</entry>
+						<entry>
+							Absolute module, Hierarchical module, 최종 호출에 대한 모니터링 통계를
+							보여준다.
+						</entry>
+					</row>
+
+					<row>
+						<entry>
+							Performance statistics for various elements, jsp, http,
+							etc.
+						</entry>
+						<entry>SQL, JDBC, JSP, HTTP 레이어별로 모니터링 통계를 보여준다.</entry>
+					</row>
+
+					<row>
+						<entry>Graphs</entry>
+						<entry>3차원 그래프, Color labels, Tooltip labels 등의 효과를 통하여 데이터 분석을 돕는다.</entry>
+					</row>
+				</tbody>
+			</tgroup>
+		</informaltable>
+
+		<informaltable>
+			<caption>주요 기능 - #2</caption>
+			<tgroup cols="2">
+				<colspec colnum="1" colname="col1" colwidth="2*"/>
+				<colspec colnum="2" colname="col2" colwidth="3*"/>		
+				<thead>
+					<row>
+						<entry align="center">주요 기능</entry>
+						<entry align="center">설명</entry>
+					</row>
+				</thead>
+
+				<tbody>
+					<row>
+						<entry>Charts</entry>
+						<entry>
+							호출된 명령어들에 대해 총 실행 시간, 실행 수, 전체 실행에 대한 백분율 등을 한눈에 알아보기 쉽도록
+							제공한다.
+						</entry>
+					</row>
+
+					<row>
+						<entry>Better readable SQL's</entry>
+						<entry>쿼리문을 쉽게 알아볼 수 있도록, 모든 쿼리를 대문자로 변환하고 띄어쓰기를 제공한다.</entry>
+					</row>
+
+					<row>
+						<entry>Hierarchical Views</entry>
+						<entry>
+							데이터 분석 결과를 알아보기 쉽도록 하기 위해 데이터, 백분율, 백분율 막대 그래프 표현시 color를
+							사용하였다.
+						</entry>
+					</row>
+
+					<row>
+						<entry>Multiple Applications</entry>
+						<entry>여러 어플리케이션의 모니터링 결과를 확인할 수 있도록 구성되어 있다.</entry>
+					</row>
+
+					<row>
+						<entry>Reporting</entry>
+						<entry>Excel, PDF, HTML, CSV 포맷 형태의 리포트 생성을 지원한다.</entry>
+					</row>
+
+					<row>
+						<entry>Refresh or Reset</entry>
+						<entry>
+							지금까지 수집된 데이터를 Reset 시키거나 최신 실행 내용을 반영하기 위한 Refresh 기능을
+							지원한다.
+						</entry>
+					</row>
+				</tbody>
+			</tgroup>
+		</informaltable>
+	</section>
+</chapter>
