@@ -17,6 +17,6 @@
 		<module>collector</module>
 		<module>agent-package</module>
 		<module>collector-package</module>
-		<module>web-gwt</module>		
+		<module>anyframe.tools.monitoring</module>		
 	</modules>
 </project>

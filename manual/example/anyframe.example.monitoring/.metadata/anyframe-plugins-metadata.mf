@@ -1,1 +1,0 @@
-foundation=anyframe,anyframe.plugin.foundation,4.0.0,anyframe.example.monitoring,anyframe.example.monitoring
