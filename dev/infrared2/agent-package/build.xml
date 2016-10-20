@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project default="install" xmlns:artifact="antlib:org.apache.maven.artifact.ant">
+	<target name="install" depends="package_base_all, package_aj, package_aw, package_agent_temp, package_agent, deploy" />	
+	
+	<path id="jarjar.classpath">
+		<pathelement location="${jarjar.jar}"/>
+		<pathelement location="${aspectjrt.jar}"/>
+	</path>
+	<taskdef name="jarjar" classname="com.tonicsystems.jarjar.JarJarTask" classpathref="jarjar.classpath"/>
+	
+	<path id="maven-ant-tasks.classpath" path="${maven-ant-tasks.jar}" />
+	<typedef resource="org/apache/maven/artifact/ant/antlib.xml"
+		uri="antlib:org.apache.maven.artifact.ant"
+		classpathref="maven-ant-tasks.classpath" />
+
+	<mkdir dir="${basedir}/target/temp-infrared-aspects"/>
+	<mkdir dir="${basedir}/target/temp-infrared-aspects/aj"/>
+	<mkdir dir="${basedir}/target/temp-infrared-aspects/aw"/>
+	
+	<mkdir dir="${basedir}/target/servlet-containers"/>
+	<mkdir dir="${basedir}/target/servlet-containers/META-INF"/>
+	<copy tofile="${basedir}/target/servlet-containers/META-INF/aop.xml"
+		file="${basedir}/src/main/resources/servlet-aop-aj.xml"/>
+	
+	<target name="package_base_all">
+		<jar destfile="${basedir}/target/infrared-base-all-2.5.BETA.jar" >
+			<zipfileset src="${infrared-base.jar}" excludes="infrared-log4j.xml" />
+			<zipfileset src="${log4j.jar}" />
+		</jar>
+	</target>
+		
+	<target name="package_aj">
+		<unjar src="${infrared-aspects.jar}" dest="${basedir}/target/temp-infrared-aspects/aj">
+			<patternset>
+				<include name="net/sf/infrared/aspects/aj/**"/>
+			</patternset>
+		</unjar>
+		<jar jarfile="${basedir}/target/temp-infrared-aspects/infrared-aspects-aj-2.5.BETA.jar"
+			basedir="${basedir}/target/temp-infrared-aspects/aj"/>
+	</target>
+	
+	<target name="package_aw">
+		<unjar src="${infrared-aspects.jar}" dest="${basedir}/target/temp-infrared-aspects/aw">
+			<patternset>
+				<exclude name="net/sf/infrared/aspects/aj/**"/>
+				<include name="**"/>
+			</patternset>
+		</unjar>
+		<jar jarfile="${basedir}/target/temp-infrared-aspects/infrared-aspects-aw-2.5.BETA.jar"
+			basedir="${basedir}/target/temp-infrared-aspects/aw"/>
+	</target>
+	
+	<target name="package_agent_temp">
+		<jarjar jarfile="${basedir}/target/infrared-agent-all-temp-2.5.BETA.jar">
+			<zipfileset src="${p6spy.jar}" />
+			<zipfileset src="${basedir}/target/infrared-base-all-2.5.BETA.jar" />
+			<zipfileset src="${infrared-agent.jar}" />
+			<zipfileset src="${basedir}/target/temp-infrared-aspects/infrared-aspects-aw-2.5.BETA.jar" excludes="builddef.lst" />
+			<rule pattern="org.apache.log4j.**" result="net.sf.infrared.org.apache.log4j.@1"/>
+			<rule pattern="log4j.xml" result="infrared-log4j.xml"/>
+			<rule pattern="log4j.properties" result="infrared-log4j.properties"/>
+		</jarjar>
+	</target>
+	
+	<target name="package_agent">
+		<jar jarfile="${basedir}/target/infrared-agent-all-2.5.BETA.jar">
+			<zipfileset src="${basedir}/target/infrared-agent-all-temp-2.5.BETA.jar"/>
+			<zipfileset src="${basedir}/target/temp-infrared-aspects/infrared-aspects-aj-2.5.BETA.jar"/>
+			<fileset dir="${basedir}/target/servlet-containers"/>
+		</jar>
+		
+		<mkdir dir="${basedir}/props"/>
+		<copy file="${basedir}/src/main/resources/infrared-agent.properties" todir="${basedir}/target/props"/>
+		<copy file="${basedir}/src/main/resources/infrared-web.properties" todir="${basedir}/target/props"/>
+		<copy file="${basedir}/src/main/resources/spy.properties" todir="${basedir}/target/props"/>
+		<copy tofile="${basedir}/target/props/ejb-aop.xml" file="${basedir}/src/main/resources/ejb-aop.xml"/>
+		<copy tofile="${basedir}/target/props/servlet-aop.xml" file="${basedir}/src/main/resources/servlet-aop.xml"/>
+		<copy tofile="${basedir}/target/props/infrared-log4j.xml" file="${basedir}/src/main/resources/infrared-log4j.xml"/>
+		
+		<delete dir="${basedir}/target/servlet-containers" failonerror="false"/>
+		<delete dir="${basedir}/target/temp-infrared-aspects" failonerror="false"/>
+		<delete file="${basedir}/target/infrared-base-all-2.5.BETA.jar" failonerror="false"/>
+		<delete file="${basedir}/target/infrared-agent-all-temp-2.5.BETA.jar" failonerror="false"/>
+	</target>
+	
+	<target name="deploy">
+		<artifact:pom id="agentpom" file="${basedir}/pom.xml" />
+		
+		<artifact:install file="${basedir}/target/infrared-agent-all-2.5.BETA.jar">
+			<pom refid="agentpom"/>
+		</artifact:install>
+	</target>
+	
+</project>

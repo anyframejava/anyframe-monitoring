@@ -1,0 +1,406 @@
+<chapter id="monitoring_views">
+	<title>Views</title>
+
+	<para>
+		Anyframe Monitoring Tool is divided into two: 
+		Select Application Window for the application selection to be monitored and Panel showing monitoring results in a various form.
+	</para>
+
+	<section id="monitoring_views_sa">
+		<title>Select Application</title>
+
+		<para>
+			Anyframe Monitoring Tool allows users to choose a monitoring object and method at Select Application window.
+			Next, areas consisting of Select Application window will be discussed.
+		</para>
+
+		<section id="monitoring_views_sa_sec001">
+			<title>formation</title>
+
+			<para>
+				Select Application window is divided into three: Select Application, 
+				Select monitoring period and Reset period. 
+				Offered is the selection functionality for “Show labels for graphs” additionally.
+			</para>
+
+			<section id="monitoring_views_sa_sec001_sec001">
+				<title>Select Application</title>
+
+				<para>
+					The list of application monitored associating with Anyframe Monitoring Tool is shown in tree format.
+					Users can select subject application from a tree list. 
+				</para>
+
+				<mediaobject>
+					<imageobject>
+						<imagedata align="center"
+							fileref="../image/monitoring/amt1.jpg" />
+					</imageobject>
+				</mediaobject>
+			</section>
+
+			<section id="monitoring_views_sa_sec001_sec002">
+				<title>Select monitoring period</title>
+
+				<para>
+					An area for defining monitoring data collection method can be selected either at “Live Data” and “Archive Mode”. 
+					Live Data means real-time monitoring. 
+					And Archive mode means monitoring on collected data on a set frequency after setting time interval. 
+				</para>
+
+				<mediaobject>
+					<imageobject>
+						<imagedata align="center"
+							fileref="../image/monitoring/amt2.jpg" />
+					</imageobject>
+				</mediaobject>
+			</section>
+
+			<section id="monitoring_views_sa_sec001_sec003">
+				<title>Reset period</title>
+
+				<para>This area is to define the frequency at a minute interval for resetting collected data for monitoring.</para>
+			</section>
+
+			<section id="monitoring_views_sa_sec001_sec004">
+				<title>Show labels for graph</title>
+
+				<para>
+					When monitoring result is shown in graph, the feature allows users to select to show labels, as well. 
+					Graph is shown with different sizes and colors according to running time and frequency. 
+					When Show label for graph is selected, graph is shown with label as below.
+				</para>
+				<mediaobject>
+					<imageobject>
+						<imagedata align="center"
+							fileref="../image/monitoring/amt4.jpg" />
+					</imageobject>
+				</mediaobject>
+			</section>
+		</section>
+	</section>
+
+	<section id="monitoring_views_panels">
+		<title>Panels</title>
+
+		<para>
+			Anyframe Monitoring Tools are divided into three: 
+			Top area, Left area and Right area. F
+			unctionalities such as Report, Refresh and Reset are provided at Top area; 
+			three panels are shown at Left area; monitoring results for each panel is displayed at Right area. 
+			Next, details on Top and Left areas will be discussed.
+		</para>
+
+		<section id="monitoring_views_panels_sec001">
+			<title>Absolute Panel</title>
+
+			<para>
+				Anyframe  Monitoring Tool allows the classification of monitoring subject layer 
+				such as HTTP, APPLICATION_SERVICE, JDBC, SQL and a total run-time and call frequency. 
+			</para>
+
+			<section id="monitoring_views_panels_sec001_sec001">
+				<title>Summary Tab - general</title>
+
+				<mediaobject>
+					<imageobject>
+						<imagedata align="center"
+							fileref="../image/monitoring/amt5.jpg" />
+					</imageobject>
+				</mediaobject>
+
+				<para>
+					Summary tab exhibits a total run time, call frequency, 
+					average time, minimum runtime, maximum runtime, first execution time, last execution time and adjusted average. 
+				</para>
+
+				<table>
+					<title>Summary Tab item</title>
+					<tgroup cols="2">
+						<colspec colnum="1" colname="col1" colwidth="3*"/>
+						<colspec colnum="2" colname="col2" colwidth="7*"/>					
+						<thead>
+							<row>
+								<entry align="center">item</entry>
+								<entry align="center">description</entry>
+							</row>
+						</thead>					
+						<tbody>
+							<row>
+								<entry>a total run time</entry>
+								<entry>the time elapsed per one call</entry>
+							</row>
+
+							<row>
+								<entry>call numbers</entry>
+								<entry>a total runtime numbers</entry>
+							</row>
+
+							<row>
+								<entry>average time</entry>
+								<entry>average runtime to handle a call</entry>
+							</row>
+
+							<row>
+								<entry>minimum and maximum runtime</entry>
+								<entry>minimum and maximum runtime out of run-time</entry>
+							</row>
+
+							<row>
+								<entry>initial or final runtime</entry>
+								<entry>initial or final runtime out of a series of calls</entry>
+							</row>
+
+							<row>
+								<entry>adjusted average</entry>
+								<entry>average runtime except initial runtime</entry>
+							</row>
+						</tbody>
+					</tgroup>
+				</table>
+
+				<para>
+					* In need of deeper understanding of numbers shown on Anyframe Monitoring Tools, 
+					please refer to <link linkend="monitoring_views_panels_sec007"> 
+					[reference] Interpreting Layer Number </link> below this page.
+				</para>
+			</section>
+
+			<section id="monitoring_views_panels_sec001_sec002">
+				<title>Trace Tab</title>
+
+				<para>
+					Running information per each layer is traceable and trace path is shown with a total runtime and a total call number at trace tab. 
+					Next, blue bar shown at trace tab will be discussed. 
+				</para>
+
+				<mediaobject>
+					<imageobject>
+						<imagedata align="center"
+							fileref="../image/monitoring/amt6.jpg" />
+					</imageobject>
+				</mediaobject>
+
+				<itemizedlist>
+					<listitem>
+						<para>Bar at root operation is fully colored with the longest length.</para>
+					</listitem>
+
+					<listitem>
+						<para>
+							The total length of operation bar called by upper-level operation is the same as that of colored section at upper-level bar.
+						</para>
+					</listitem>
+
+					<listitem>
+						<para>
+							Colored section per each operation shows a percentage point of a total runtime of relevant section by that of upper-level section.
+						</para>
+					</listitem>
+				</itemizedlist>
+
+				<para>These bars allow monitoring of application bottleneck state.</para>
+			</section>
+
+			<section id="monitoring_views_panels_sec001_sec003">
+				<title>Summary Tab - SQL</title>
+
+				<para>
+					The next picture shows the top five query statements based on query call intervals through summary tab. 
+					The total query statement implemented can be checked at tooltip.
+				</para>
+
+				<mediaobject>
+					<imageobject>
+						<imagedata align="center"
+							fileref="../image/monitoring/amt9.jpg" />
+					</imageobject>
+				</mediaobject>
+
+				<para>
+					The table in the above picture is divided in Prepared and Execute statement, showing data. 
+					Prepared and Eexcute statement means JDBC method called to handle a certain request.
+				</para>
+			</section>
+		</section>
+
+		<section id="monitoring_views_panels_sec002">
+			<title>Hierarchical Panel</title>
+
+			<para>
+				Hiearatchical panel describes a layer name as call relationship between layers classified with “.” 
+				Mark and suggests data document on layer expressed at the last part. 
+				(For example, HTTP.APPLICATION_LAYER.JDBC displays information on JDBC layer called from HTTP.APPLICATION_LAYYER.)
+			</para>
+
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center"
+						fileref="../image/monitoring/amt10.jpg" />
+				</imageobject>
+			</mediaobject>
+
+			<para>Monitoring results in the same type with Absolute Panel can be checked at Hierarchical Panel,too.</para>
+		</section>
+
+		<section id="monitoring_views_panels_sec003">
+			<title>Last Invocation Panel</title>
+
+			<para>
+				Last Invocation panel provides a track down method regarding a few lastly called running flows. 
+				The chart shows a total running time and numbers.
+			</para>
+
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center"
+						fileref="../image/monitoring/amt14.jpg" />
+				</imageobject>
+			</mediaobject>
+
+			<para>
+				It is likely that sequence invocation is counted either just once or a few times per sequence shown at Last Invocation Panel. 
+				In the case of operation calling other operation included in stack trace, more than one count is in the high likelihood.  
+				Otherwise, if operation does not call other operations, stack trace is not included and will be counted only once.
+			</para>
+		</section>
+
+		<section id="monitoring_views_panels_sec004">
+			<title>Report</title>
+
+			<para>
+				This feature is to report monitoring results in a various document format. 
+				The click of Report link will lead to opening of Report Wizard. 
+				A slew of reports will be created based on selected value per each Step.
+			</para>
+
+			<itemizedlist>
+				<listitem>
+					<para>Step1 : The selection of report format.</para>
+
+					<mediaobject>
+						<imageobject>
+							<imagedata align="center"
+								fileref="../image/monitoring/amt17.jpg" />
+						</imageobject>
+					</mediaobject>
+				</listitem>
+
+				<listitem>
+					<para>Step 2 : The selection of panel for reporting subject. 
+					( The selection between Absolute module and Hierarchical module)</para>
+
+					<mediaobject>
+						<imageobject>
+							<imagedata align="center"
+								fileref="../image/monitoring/amt18.jpg" />
+						</imageobject>
+					</mediaobject>
+				</listitem>
+
+				<listitem>
+					<para>Step 3 : The selection of detailed information on report contents. </para>
+
+					<mediaobject>
+						<imageobject>
+							<imagedata align="center"
+								fileref="../image/monitoring/amt19.jpg" />
+						</imageobject>
+					</mediaobject>
+				</listitem>
+
+				<listitem>
+					<para>
+						Step 4 : The selection of report contents. 
+						Determine whether to select a few top data out of the whole data, display in value or in diagram, or both.</para>
+					<mediaobject>
+						<imageobject>
+							<imagedata align="center"
+								fileref="../image/monitoring/amt20.jpg" />
+						</imageobject>
+					</mediaobject>
+				</listitem>
+
+				<listitem>
+					<para>
+						Step 5 : If Finish button is clicked, summary of selected information on report to be created is on display. 
+						And if Download button is clicked, created report can be downloaded locally.
+					</para>
+
+					<mediaobject>
+						<imageobject>
+							<imagedata align="center"
+								fileref="../image/monitoring/amt21.jpg" />
+						</imageobject>
+					</mediaobject>
+				</listitem>
+			</itemizedlist>
+
+			<para>The next picture is the report example when the report format is in the form of Excel. </para>
+
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center"
+						fileref="../image/monitoring/amt22.jpg" />
+				</imageobject>
+			</mediaobject>
+		</section>
+
+		<section id="monitoring_views_panels_sec005">
+			<title>Refresh</title>
+
+			<para>
+				The feature is to check monitoring results on running information changeable on a real-time basis. 
+				If Refresh button is clicked, the currant status of application is scanned once again, renewing real-time monitoring information.
+			</para>
+		</section>
+
+		<section id="monitoring_views_panels_sec006">
+			<title>Reset</title>
+
+			<para>
+				Reset feature is to erase data collected up to now and initialize. 
+				Be aware that if Reset link is clicked, all the collected data will be deleted.
+			</para>
+		</section>
+
+		<section id="monitoring_views_panels_sec007">
+			<title>[Reference] Interpreting Layer Number</title>
+
+			<para>
+				From now on, values shown on Anyframe Monitoring Tool will be discussed. A deeper understanding is in order for efficient use of the tool.
+			</para>
+
+			<para>
+				Under the normal conditions, a total running time of lower-levels is equal to that of upper-level. 
+				However, the next picture shows otherwise.
+			</para>
+
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center" fileref="../image/monitoring/exclusivemode.jpg" />
+				</imageobject>
+			</mediaobject>
+
+			<para>
+				The above pictures show that the total running time value at the lower level is 3125(ms), 
+				however, the total running time of APPLICATION_SERVICE including lower level is 2484(ms).
+			</para>
+			
+			<para>In this case, the understanding of multi-threading should precede.</para>
+
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center" fileref="../image/monitoring/C.png" />
+				</imageobject>
+			</mediaobject>
+
+			<para>
+				As shown in the above picture, let’s assume a method to connect layer x starting point and final point. 
+				Three methods are simultaneously implemented at two separate threads. 
+				Method A is implemented at 70ms, with Method B 50ms and Method C 30ms. However, the total running time for Layer X is 80ms. 
+				(70+50+30 is not equal to 150ms) because these methods are being implemented at two threads at the same time.
+			</para>
+		</section>
+	</section>
+</chapter>

@@ -1,0 +1,374 @@
+<chapter id="monitoring_configuration">
+	<title>Configuration</title>
+
+	<para>
+Next, basic characters and definition method for monitoring subject will be discussed for a specific application monitoring via Anyframe Monitoring Tool. 
+	</para>
+
+	<para>
+Also, the issue might be raised that infraRED Agent file is installed within application server for running monitored application, leading to taking up large memory size. Looked into is property definition method to deal with the issue.  
+	</para>
+
+	<section id="monitoring_configuration_sec001">
+		<title>Definition of Monitoring Property</title>
+
+		<para>
+			Application to be monitored requires the definition of basic property in order to communicate with Anyframe Monitoring Tool. 
+			Therefore, after downloading  
+			<ulink url="http://www.anyframejava.org/project/monitoring#downloads">
+			Agent Property File(included within anyframe.tools.monitoring.agent-x.x.x.zip)</ulink>
+			 including this property definition, copied is Agent Property file within application WebRoot/WEB-INF/classes 
+			 folder after taking into consideration as below and adjusting the file according to the project. 
+		</para>
+
+		<table>
+			<title>Monitoring Properties - #1</title>
+			<tgroup cols="3">
+				<colspec colnum="1" colname="col1" colwidth="1*"/>
+				<colspec colnum="2" colname="col2" colwidth="3*"/>		
+				<colspec colnum="3" colname="col3" colwidth="1*"/>	
+				<thead>
+					<row>
+						<entry align="center">Property</entry>
+						<entry align="center">Description</entry>
+						<entry align="center">Default Value</entry>
+					</row>
+				</thead>
+
+				<tbody>
+					<row>
+						<entry>enable-monitoring</entry>
+						<entry>
+							Defined is whether relevant application should be monitored.	If false, no data shows at Anyframe Monitoring Tool GUI.
+						</entry>
+						<entry/>
+					</row>
+
+					<row>
+						<entry>jdbc-monitoring-enable</entry>
+						<entry>Defined is whether JDBC implementation on relevant application should be monitored. </entry>
+						<entry>false</entry>
+					</row>
+
+					<row>
+						<entry>enable-call-tracing</entry>
+						<entry>
+							Defined is whether record is created according to implementation order via Anyframe Monitoring Tool. 
+							Operation order is shown as tree structure at Anyframe Monitoring Tool GUI. 
+						</entry>
+						<entry>false</entry>
+					</row>
+
+					<row>
+						<entry>prune-threshold</entry>
+						<entry>
+							Milliseconds described at Anyframe Monitoring Tool are defined. 
+							If run time is less than set milliseconds, it does not show. 
+						</entry>
+						<entry>3000</entry>
+					</row>
+
+					<row>
+						<entry>last-invocations-to-trace</entry>
+						<entry>
+							Invocation numbers expressed at Last Invocation Page at Anyframe Monitoring Tool are defined. 
+						</entry>
+						<entry>0</entry>
+					</row>
+
+					<row>
+						<entry>prepared-statement-monitoring-enable</entry>
+						<entry>When PreparedStatment is expressed, defined is whether the parameter of relevant query statement is accompanied. </entry>
+						<entry>false</entry>
+					</row>
+
+					<row>
+						<entry>mbean-server-provider</entry>
+						<entry>
+							Defined is the class name of MBean server provider. 
+							Generally, Weblogic server is defined as net.sf.infrared.weblogic.configmgmt. 
+							WLSMBeanServerProvider and JBoss server is as net.sf.infrared.jboss.configmgmt.JBossMBeanServerProvider. 
+							Mbean is used to set property information by utilizing JMX based tools such as MC4J Management Console. 
+							And infraedProperties MBean supports to set property information such as enable-monitoring, 
+							jdbc-monitoring-enable, enable-call-tracing, and prune-threshold. 
+						</entry>
+						<entry>none</entry>
+					</row>
+				</tbody>
+			</tgroup>
+		</table>
+		
+		<table>
+			<title>Monitoring Properties - #2</title>
+			<tgroup cols="3">
+				<colspec colnum="1" colname="col1" colwidth="1*"/>
+				<colspec colnum="2" colname="col2" colwidth="2*"/>		
+				<colspec colnum="3" colname="col3" colwidth="1*"/>	
+				<thead>
+					<row>
+						<entry align="center">Property</entry>
+						<entry align="center">Description</entry>
+						<entry align="center">Default Value</entry>
+					</row>
+				</thead>
+
+				<tbody>
+					<row>
+						<entry>collection-strategy</entry>
+						<entry>
+							Defined is a class name whose strategy for expressing collected data.
+							Anyframe Monitoring Tool additionally supports only net.sf.infrared.agent.transport.impl.CentralizedCollectionStrategy
+							DoNothingCollectionStrategy applied as default, as its name implies, does not carry out any work.
+						</entry>
+						<entry>
+							net.sf.infrared.agent.
+							transport.impl.
+							DoNothingCollectionStrategy
+						</entry>
+					</row>
+
+					<row>
+						<entry>collection-strategy.ccs.remotheost</entry>
+						<entry>
+							Defined is ip of computer running Anyframe Monitoring Tool. 
+							Data collected from monitored application is flushed to collector via socket. 
+						</entry>
+						<entry>localhost</entry>
+					</row>
+
+					<row>
+						<entry>collection-strategy.ccs.port</entry>
+						<entry>
+							Defined is port to be listened by collector at Anyframe Monitoring Tool. 
+						</entry>
+						<entry>7777</entry>
+					</row>
+
+					<row>
+						<entry>collection-strategy.ccs.flush-frequency</entry>
+						<entry>
+							Defined is how often data of monitored application at Remotheost is flushed to Collector. 
+							Flush interval value needs to be maximized for reliable performance. 
+							The bigger the interval value is, the bigger statistics value is to be stored, requiring bigger memory size.
+							 On the contrary, smaller interval value can lead to network traffic. 
+						</entry>
+						<entry>30000</entry>
+					</row>
+
+					<row>
+						<entry>collection-strategy.ccs.pool</entry>
+						<entry>
+							Defined is whether data collected from thread pool will be maintained before Collector flushes. 
+						</entry>
+						<entry>true</entry>
+					</row>
+
+					<row>
+						<entry>collection-strategy.ccs.pool.
+						maxThreads</entry>
+						<entry>
+							Defined is the maximum number of thread allowable at thread pool. 
+							Properties of collection-strategy.ccs.pool can be applied only if they are true.
+						</entry>
+						<entry>1</entry>
+					</row>
+
+					<row>
+						<entry>collection-strategy.ccs.pool.buffer-length</entry>
+						<entry>
+							Defined is the size of pool buffer size notifying sustainable element numbers.
+							Properties of collection-strategy.ccs.pool can be applied only if they are true. 
+						</entry>
+						<entry>100</entry>
+					</row>
+				</tbody>
+			</tgroup>
+		</table>		
+
+		<para>As below are contents of infrared-agent.properties file including properties mentioned above. </para>
+		<programlisting language="java"># The sample infrared-agent.properties
+
+enable-monitoring true
+enable-call-tracing true
+jdbc-monitoring-enable true
+prune-threshold -1
+last-invocations-to-trace 5
+prepared-statement-monitoring-enable true
+
+collection-strategy net.sf.infrared.agent.transport.impl.CentralizedCollectionStrategy
+collection-strategy.ccs.remotheost localhost
+collection-strategy.ccs.port 7777
+collection-strategy.ccs.pool false
+collection-strategy.ccs.flush-frequency 3000</programlisting>
+	</section>
+
+	<section id="monitoring_configuration_sec002">
+		<title>Definition of Monitoring object</title>
+
+		<section id="monitoring_configuration_sec002_sec001">
+			<title>HTTP Request Monitoring</title>
+			<para>
+				To monitor HTTP Request by using Anyframe Monitoring Tool, 
+				Listener and Filter on HTTP Request within web.xml file of relevant application should be registered. 
+				As below are some contents of seb.xml. 
+			</para>
+
+			<programlisting language="xml"><![CDATA[...
+<listener>
+    <listener-class>
+        ]]><emphasis role="bold">net.sf.infrared.agent.setup.InfraREDServletContextListener</emphasis><![CDATA[
+	</listener-class>
+</listener>
+<filter>
+    <filter-name>infrared</filter-name>
+    <filter-class>
+        ]]><emphasis role="bold">net.sf.infrared.aspects.servlet.InfraREDServletFilter</emphasis><![CDATA[
+    </filter-class>
+</filter>
+<filter-mapping>
+    <filter-name>infrared</filter-name>
+    <url-pattern>*.do</url-pattern>
+</filter-mapping>
+...]]></programlisting>
+
+			<para>
+				According to setting above, all requests ending with .do are filtered via infrared filter. 
+				By doing so, all HTTP Requests are able to be monitored via Anyframe Monitoring Tool. 
+			</para>
+		</section>
+
+		<section id="monitoring_configuration_sec002_sec002">
+			<title>Business Service Call Monitoring</title>
+
+			<para>
+				Anyframe offers ApiAspect class for monitoring call information on service consisting of business layers. 
+				Therefore, when monitored application is implemented, if ApiAspect is applied, 
+				call information on business service can be monitored. 
+				Next are contents of context-monitoring-api.xml file including property information on ApiAspect.
+				<programlisting language="xml"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+    
+    <bean id="anyframe_api_profiler"
+        class="]]><emphasis role="bold">anyframe.common.aop.aspects.ApiAspect</emphasis><![CDATA[">
+        <property name="layerName" value="APPLICATION_SERVICE"></property>
+    </bean>
+    <bean id="anyframe_api_profiler_aop_autowire"
+        class="anyframe.common.aop.ExclusiveBeanNameAutoProxyCreator">
+        <property name="beanNames" value="*Service"/>
+        <property name="exclusiveBeanNames" value="anyframe_api_profiler"/>
+        <property name="interceptorNames">
+            <list>
+                <value>anyframe_api_profiler</value>
+            </list>
+        </property>
+    </bean>
+</beans>]]></programlisting>
+			</para>
+			<para>
+				According to property definition above, ApiAspect is defined as Bean under the name of anyframe_api_profiler. 
+				And bean named anyframe_api_profiler_aop_autowire applies all beans which name ends with service at every running as interceptor.  
+				ApiAspect can have a ‘layerName’ property and it is used to define the layer name to describe monitoring results via ApiApsect. 
+				Also, ApiAspect implements the relevant method through proxy regarding a specific service.
+ 				Anyframe creates proxy for a specific service by using interface so that in the case of using ApiAspect, 
+ 				the relevant service should include interface and implementation class.
+			</para>
+		</section>
+
+		<section id="monitoring_configuration_sec002_sec003">
+			<title>Monitoring of query statement implementation</title>
+
+			<para>
+				Anyframe offers JdbcAspect class for monitoring implementation information on a specific query statement.
+				JdbcAspect is to check query statement or query implementation time. 
+				Therefore, when application to be monitored is implemented, if JdbcAspect is applied, query statement implementation areas cab be monitored. 
+				Next are context-monitoring-jdbc.xml file contents including property information on JdcbAspect.
+				<programlisting language="xml"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+    
+    <bean id="anyframe_jdbc_profiler" 
+        class="]]><emphasis role="bold">anyframe.common.aop.aspects.JdbcAspect</emphasis><![CDATA[">
+    </bean>
+    <bean id="anyframe_jdbc_profiler_aop_autowire"
+        class="anyframe.common.aop.ExclusiveBeanNameAutoProxyCreator">
+        <property name="beanNames" value="dataSource"/>
+        <property name="exclusiveBeanNames" value="anyframe_jdbc_profiler"/>
+        <property name="interceptorNames">
+            <list>
+                <value>anyframe_jdbc_profiler</value> 
+            </list>
+        </property>
+    </bean>
+</beans>]]></programlisting>
+			</para>
+
+			<para>
+				According to the property definition as above, JdbcAspect is defined as Bean under the name of antframe jdbc profiler. 
+				And whenever a bean named datasource is executed by a beam named anyframe_jdbc_profiler_Aop_autowire, 
+				a bean named anyframe_jdbc_profiler will be implemented as interceptor. 
+				<note>
+					<title>Precaution in case that Aspect is applied</title>
+					<para>
+						Anyframe Monitoring Tool does not authentsize all functions supported at InfraRED. 
+						Therefore, it is recommended to use as mentioned above. 
+					</para>
+				</note>				
+			</para>
+		</section>
+	</section>
+
+	<section id="monitoring_configuration_sec003">
+		<title>DB default change method </title>
+
+		<para>
+			If monitoring server is run for the first time, .infrared/infrared-db.properties setup file is created under User Home directory. 
+			If Anyframe Monitoring Tool is begun, this setup file is automatically created under C:\document and settings\User name\.infrared.
+			Anyframe Monitoring Tool only supports HSQL DB and if default value is used as it is, 
+			when there are large monitoring data, memory overflow might take place at server. 
+			To prevent this, infrared-db.properties are changed as below and server restarts. 
+
+			<programlisting language="java">#HSQL Database Engine
+			
+hsqldb.script_format=0
+
+#Basically, value is not set, but, the project site with memory issue can set gc interval as below.(ms)
+runtime.gc_interval=60000
+sql.enforce_strict_size=false
+#The average size of 1kb record 2^10 = 1024 bytes
+#(Set-up suitable for project situation, default 10 is recommended)
+hsqldb.cache_size_scale=10
+#Default value recommended
+readonly=false
+#Default value recommended(If JDK does not support NIO, it is set as false.)
+hsqldb.nio_data_file=true 
+#The number of record to be cached into 4k rows memory.
+#(The meaning of 14: 2^14 units, the bigger the number is, the better performance is, but, at the expense of memory space.)
+hsqldb.cache_scale=14
+version=1.8.0
+#To decide whether table information should be stored in memory or disk
+##( Default is set as me basic Memory, however, given that server memory is full up to its capacity, cache memory is set.)
+hsqldb.default_table_type=cached
+#The size which stores 8gb db info into disk cache. 
+#(8GB <![CDATA[<]]>-- Setup suitable for situation)
+hsqldb.cache_file_scale=8 
+sql.compare_in_locale=false
+hsqldb.log_size=200 
+#hsql Log size (maintaining the basic value) nghg
+modified=yes
+hsqldb.cache_version=1.7.0
+hsqldb.original_version=1.8.0
+hsqldb.compatible_version=1.8.0</programlisting>
+		</para>
+	</section>
+</chapter>

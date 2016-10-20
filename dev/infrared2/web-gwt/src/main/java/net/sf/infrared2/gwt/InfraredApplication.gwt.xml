@@ -1,0 +1,17 @@
+<module>
+
+	<inherits name='com.google.gwt.user.User' />
+	<inherits name="com.google.gwt.core.Core" />
+	<inherits name="com.google.gwt.user.History" />
+	<inherits name="com.google.gwt.i18n.I18N" />
+	<inherits name="com.google.gwt.http.HTTP" />
+	<inherits name="com.google.gwt.xml.XML" />
+	<inherits name="com.gwtext.GwtExt" />
+
+	<entry-point
+		class='net.sf.infrared2.gwt.client.InfraredApplication' />
+
+	 <servlet path='/ms'
+		class='net.sf.infrared2.gwt.server.service.SIRServiceStubImpl' />
+ 
+</module>

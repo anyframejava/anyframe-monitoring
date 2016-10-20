@@ -1,0 +1,22 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	
+	<modelVersion>4.0.0</modelVersion>
+	
+	<groupId>infrared</groupId>
+	<artifactId>infrared-common</artifactId>
+	<version>2.5.BETA</version>
+	<packaging>pom</packaging>
+	<name>InfraRED</name>
+	<description>InfraRED Parent Module.</description>
+	
+	<modules>
+		<module>base</module>		
+		<module>agent</module>
+		<module>aspects</module>
+		<module>collector</module>
+		<module>agent-package</module>
+		<module>collector-package</module>
+		<module>web-gwt</module>		
+	</modules>
+</project>

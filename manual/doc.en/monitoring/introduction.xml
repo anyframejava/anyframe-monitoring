@@ -1,0 +1,145 @@
+<chapter id="monitoring_introduction">
+	<title>Introduction</title>
+
+	<para>
+		InfraRED is an open source performance tool to monitor JavaEE based application performance. 
+		By using Aspect, it collects data to measure performance and reports data analysis result.
+		Anyframe Monitoring Tool fixes diverse infraRED(
+		<ulink url="http://infrared.sourceforge.net/versions/latest/">http://infrared.sourceforge.net</ulink>)
+		 based bugs inherited within infraRED and provides enhanced UI. 
+		Next, basic structure of InfraRED, foundation of Anyframe Monitoring Tool and major features of Anyframe Monitoring Tool will be discussed.
+	</para>
+
+	<section id="monitoring_introduction_sec001">
+		<title>Basic structure</title>
+
+		<para>Infrared basically consists of Agent, Collector, and GUI as shown in picture below.</para>
+
+		<mediaobject>
+			<imageobject>
+				<imagedata align="center"
+					fileref="../image/monitoring/architecture.png" />
+			</imageobject>
+		</mediaobject>
+
+		<itemizedlist>
+			<listitem>
+				<para>
+					Agent : to collect and integrate data on application implementation based on request 
+					from application to be monitored and send them to Collector
+				</para>
+			</listitem>
+
+			<listitem>
+				<para>
+					Collector : to combine data delivered from different agents and store them in DB.
+				</para>
+			</listitem>
+
+			<listitem>
+				<para>
+					GUI : to exhibit collected data in diverse forms to users by asking query to Collector. 
+					Anyframe Monitoring Tool uses Ajax based Google Web Tool Kit or GWT as basis and offers more convenient, 
+					efficient and enhanced UI.
+				</para>
+			</listitem>
+		</itemizedlist>
+	</section>
+
+	<section id="monitoring_introduction_sec002">
+		<title>Major features</title>
+
+		<para>As below are major features provided at Anyframe Monitoring Tool.</para>
+
+		<table>
+			<title>Major features - #1</title>
+			<tgroup cols="2">
+				<colspec colnum="1" colname="col1" colwidth="2*"/>
+				<colspec colnum="2" colname="col2" colwidth="3*"/>		
+				<thead>
+					<row>
+						<entry align="center">Major features</entry>
+						<entry align="center">description</entry>
+					</row>
+				</thead>
+
+				<tbody>
+					<row>
+						<entry>Statistics</entry>
+						<entry>
+							Absolute module, Hierarchical modle and monitoring statistics on final call are shown.
+						</entry>
+					</row>
+
+					<row>
+						<entry>
+							Performance statistics for various elements, jsp, http,
+							etc.
+						</entry>
+						<entry>Each layer of SQL, JDBC, JSP, HTTP displays monitoring statistics.</entry>
+					</row>
+
+					<row>
+						<entry>Graphs</entry>
+						<entry>Data analysis is supported with three-dimensional graph, color labels and Tooltip labels.</entry>
+					</row>
+				</tbody>
+			</tgroup>
+		</table>
+
+		<table>
+			<title>Major features - #2</title>
+			<tgroup cols="2">
+				<colspec colnum="1" colname="col1" colwidth="2*"/>
+				<colspec colnum="2" colname="col2" colwidth="3*"/>		
+				<thead>
+					<row>
+						<entry align="center">Major features</entry>
+						<entry align="center">Description</entry>
+					</row>
+				</thead>
+
+				<tbody>
+					<row>
+						<entry>Charts</entry>
+						<entry>
+							A total run time, running numbers and percentage point over a total implementation 
+							on called commands are offered in the form of easy representation.
+						</entry>
+					</row>
+
+					<row>
+						<entry>Better readable SQL's</entry>
+						<entry>For easy representation of query statement, 
+						all queries are changed in capitals and their words are spaced.</entry>
+					</row>
+
+					<row>
+						<entry>Hierarchical Views</entry>
+						<entry>
+							For easy representation of data analysis result, 
+							data, percentage point and percentage point bar graph use coloring.
+						</entry>
+					</row>
+
+					<row>
+						<entry>Multiple Applications</entry>
+						<entry>The configuration allows checking of monitoring result on various applications.</entry>
+					</row>
+
+					<row>
+						<entry>Reporting</entry>
+						<entry>It supports the report creation in the format of Excel, PDF, HTML, CSV.</entry>
+					</row>
+
+					<row>
+						<entry>Refresh or Reset</entry>
+						<entry>
+							It supports Refresh feature to reset collected data up to now or update the latest implementation contents.
+						</entry>
+					</row>
+				</tbody>
+			</tgroup>
+		</table>
+	</section>
+</chapter>

@@ -1,0 +1,206 @@
+<chapter id="monitoring_installation">
+	<title>Installation</title>
+
+	<para>
+		To monitor a specific application based on Anyframe Monitoring Tool, after proceeding with routines as below, 
+		Anyframe Monitoring Tool is installed and normal operation should be checked. (Anyframe Monitoring Tool was tested only at IE 6.x)/
+	</para>
+
+	<section id="monitoring_installation_sec001">
+		<title>Download</title>
+
+		<para>
+			<ulink url="http://www.anyframejava.org/project/monitoring#downloads">anyframe.tools.monitoring-x.x.x.war and
+			anyframe.tools.monitoring.agent-x.x.x.zip files.</ulink>
+			(Except, in the case of war file, if war file is downloaded via Anyframe Open Source Community, 
+			file extension can be processed in the zip form, therefore, extension should be changed.) File for downloading is as below.
+
+		</para>
+
+		<itemizedlist>
+			<listitem>
+				<para>anyframe.tools.monitoring-x.x.x.war : Anyframe Monitoring Tool</para>
+			</listitem>
+
+			<listitem>
+				<para>
+					anyframe.tools.monitoring-agent-x.x.x.zip : Library and property file deployed to monitored application
+				</para>
+			</listitem>
+		</itemizedlist>
+	</section>
+
+	<section id="monitoring_installation_sec002">
+		<title>WAR file deployment</title>
+
+		<para>In the case that WAS is Tomcat, looked into is the method to deploy Anyframe Monitoring Tool.</para>
+
+		<orderedlist>
+			<listitem>
+				<para>
+					Move anyframe.tools.monitoring-x.x.x.war file into in the [Tomcat Home]\webapps folder
+				</para>
+			</listitem>
+			<listitem>
+				<para>If Tomcat server is up and running, decompression will take place automatically. </para>
+			</listitem>
+		</orderedlist>
+
+		<para>
+			In the case of other application servers, you should deploy war file downloaded according to each application server. 
+		</para>
+	</section>
+
+	<section id="monitoring_installation_sec003">
+		<title>Execution Confirmed</title>
+
+		<para>
+			In the case that WAS is Tomcat, 
+			looked into is the method to confirm whether Anyframe Monitoring Tool is executed in the normal fashion. 
+		</para>
+
+		<orderedlist>
+			<listitem>
+				<para>By executing >[Tomcat Home]\bin\catalina.bat file, Anyframe Monitoring Tool starts. </para>
+			</listitem>
+			<listitem>
+				<para>Check whether Tomcat server starts in the normal fashion via console window.</para>
+			</listitem>
+			<listitem>
+				<para>
+					Enter <emphasis role="bold">http://localhost:8080/anyframe.tools.monitoring-1.0.0</emphasis> 
+					in the browser address box and check whether Anyframe Monitoring Tool screen pops up. 
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					When SELECT APPLICATION is selected at upper left in Anyframe Monitoring Tool, popup to select monitored application shows up. 
+					If monitored application is not executed, application list will not be searched. 
+				</para>
+				<mediaobject>
+					<imageobject>
+						<imagedata align="center"
+							fileref="../image/monitoring/monitoring_test.jpg" />
+					</imageobject>
+				</mediaobject>
+			</listitem>
+		</orderedlist>
+	</section>
+
+	<section id="monitoring_installation_sec004">
+		<title>Test Monitoring</title>
+
+		<para>
+			After downloading <link linkend="monitoring_installation_sec005">anyframe.example.monitoring project</link> provided by this manual, 
+			run a test to check whether monitoring is up and running in the normal fashion by implementing Example application 
+			(* regarding property definition for monitored application and definition for monitoring object, 
+			refer to <link linkend="monitoring_configuration">Configuration</link>.
+		</para>
+		<important>
+			<title>Agent Installation for Monitoring</title>
+			<para>
+				Bear in mind that to monitor a specific application execution, 
+				class path referred by monitored application should add infrared-agent-all-servlet-x.x.x.jar file.
+				Infrared-agent-all-servlet-x.x.x.jar file is included within 
+				<ulink url="http://www.anyframejava.org/project/monitoring#downloads">anyframe.tools.monitoring-agent-x.x.x.zip</ulink> 
+				and downloadable via Anyframe OpenSource Community.
+				Agent library is defined as reference relationship within pom.xml of anyframe.example.monitoring provided by this manual.
+			</para>
+		</important>
+		<orderedlist>
+			<listitem>
+				<para>
+					When SELECT APPLICATION is chosen at upper left in Anyframe Monitoring Tool, 
+					shown are user’s computer name and application name.
+				</para>
+			</listitem>
+
+			<listitem>
+				<para>After selecting relevant application and clicking OK button, monitoring results can be checked.</para>
+				<mediaobject>
+					<imageobject>
+						<imagedata align="center"
+							fileref="../image/monitoring/monitoring_select.jpg" />
+					</imageobject>
+				</mediaobject>
+			</listitem>
+		</orderedlist>
+	</section>
+	<section id="monitoring_installation_sec005">
+		<title>Resources</title>
+		<para>
+			<itemizedlist>
+				<listitem><para>Download</para>
+					<para>
+						After downloading hsqldb.zip including test DB and 
+						anyframe.example.monitoring.zip file including example code, decompress them. 
+						And by executing start.cmd (or start.sh) file within hsqldb folder, run test DB.
+
+						<itemizedlist>
+							<listitem>
+								<para>Maven based Execution </para>
+								<para>
+									Move into decompression folder and then execute the command called mvn jetty:run. 
+									If Jetty Server starts in the normal fashion, 
+									open a browser and enter http://localhost:8080/anyframe.example.monitoring at address box, confirming execution result.
+								</para>
+							</listitem>
+							<listitem>
+								<para>Eclipse based Execution - m2eclipse, WTP</para>
+								<para>
+									After decompressing project is imported, 
+									click the right button on the mouse and select Maven > Enable Dependency Management on the menu and fix the compiling error. 
+									And then after clicking the right button on the mouse, 
+									click Run As > Run on Server (Tomcat based) on the context menu. 
+									If Tom Server starts in normal fashion, 
+									open the browser and enter http://localhost:8080/anyframe.example.monitoring at the address box to confirm the execution result.
+								</para>
+							</listitem>										
+							<listitem>
+								<para>Eclipse based Execution - WTP</para>
+								<para>
+									After decompressing project is imported, reference library is copied into 
+									WEB-INF/lib at src/main/webapp folder by executing build.xml. 
+									After selecting relevant project, click the right button on the mouse and click Run As > Run on Server on the context menu.
+									If Tomcat Server starts in the normal fashion, 
+									open a browser and type in http://localhost:8080/anyframe.example.monitoring at the address box and confirm it. 
+									(* For build.xml execution, maven-ant-task-2.0.10.jar file must exist within ${ANT_HOME}/lib.)
+								</para>
+							</listitem>									
+						</itemizedlist>
+					</para>
+					<table>
+						<title>Download List</title>
+							<tgroup cols="2">
+								<colspec colnum="1" colname="col1" colwidth="4*"/>
+								<colspec colnum="2" colname="col2" colwidth="6*"/>
+								<thead>
+									<row>
+										<entry align="center">Name</entry>
+										<entry align="center">Download</entry>
+									</row>
+								</thead>
+								<tbody>
+									<row>
+										<entry align="left">anyframe.example.monitoring.zip</entry>
+										<entry align="left"><ulink
+											url="http://dev.anyframejava.org/docs/monitoring/1.0.0/examples/anyframe.example.monitoring.zip">Download</ulink></entry>
+									</row>								
+									<row>
+										<entry align="left">hsqldb.zip</entry>
+										<entry align="left"><ulink
+											url="http://dev.anyframejava.org/docs/anyframe/4.0.0/examples/hsqldb.zip">Download</ulink></entry>
+									</row>										
+									<row>
+										<entry align="left">maven-ant-tasks-2.0.10.jar</entry>
+										<entry align="left"><ulink
+											url="http://dev.anyframejava.org/docs/anyframe/4.0.0/examples/maven-ant-tasks-2.0.10.jar">Download</ulink></entry>
+									</row>											
+								</tbody>
+							</tgroup>
+						</table> 
+				</listitem>
+			</itemizedlist>
+		</para>
+	</section>		
+</chapter>

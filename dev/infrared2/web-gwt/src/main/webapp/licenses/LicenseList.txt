@@ -1,0 +1,16 @@
+1. Anyframe Monitoring Tool 3rd-party licenses
+
+다음은 Anyframe Monitoring Tool에서 참조하는 각 외부 오픈 소스의 정보(라이센스, 소스 코드 및 라이브러리 다운로드 등)를 얻을 수 있는 사이트 URL이므로 참고하도록 한다.
+
+1) The Legion of th Bouncy Castle : http://www.bouncycastle.org
+2) Apache Commons BeanUtils 1.7.0 : http://commons.apache.org/beanutils/, Apache License 2.0
+3) Apache Commons Logging 1.1 : http://commons.apache.org/logging/, Apache License 2.0
+4) gwt-ext Widget Library 2.0 : http://code.google.com/p/gwt-ext/, GNU Lesser General Public License 
+5) gwt-servlet-1.4.60.jar
+6) HSQLDB 1.8.0.1 : http://www.hsqldb.org/, Hsqldb License
+7) infraRED 2.5.3.BETA : http://infrared.sourceforge.net,  Apache License 2.0
+8) iText 2.0.8 : http://www.lowagie.com/iText/,  MPL and GNU Lesser General Public Licence
+9) JFree 1.0.12 : http://www.jfree.org/jcommon/, GNU Lesser General Public Licence
+10) Log4j 1.2.9 : http://logging.apache.org/log4j, Apache License 2.0
+11) Apache POI : http://poi.apache.org/, Apache License 2.0
+12) Spring Framework 1.2 : http://www.springsource.org/, Apache License 2.0

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd"
+[
+<!ENTITY monitoring_introduction SYSTEM "monitoring/introduction.xml">
+<!ENTITY monitoring_installation SYSTEM "monitoring/installation.xml">
+<!ENTITY monitoring_configuration SYSTEM "monitoring/configuration.xml">
+<!ENTITY monitoring_views SYSTEM "monitoring/views.xml">
+]
+>
+
+	<!--
+		Licensed to the Apache Software Foundation (ASF) under one or more
+		contributor license agreements. See the NOTICE file distributed with
+		this work for additional information regarding copyright ownership.
+		The ASF licenses this file to you under the Apache License, Version
+		2.0 (the "License"); you may not use this file except in compliance
+		with the License. You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0 Unless required by
+		applicable law or agreed to in writing, software distributed under the
+		License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+		CONDITIONS OF ANY KIND, either express or implied. See the License for
+		the specific language governing permissions and limitations under the
+		License.
+	-->
+
+<book lang="ko">
+	<title>Anyframe Monitoring Tool</title>
+
+	<bookinfo>
+		<copyright>
+			<year>Copyright ⓒ 2007-2011</year>
+			<holder>Samsung SDS</holder>
+		</copyright>
+		<releaseinfo>Version 1.1.0</releaseinfo>
+
+		<productname>Anyframe Monitoring Tool</productname>
+
+		<authorgroup>
+			<corpauthor></corpauthor>
+		</authorgroup>
+
+		<mediaobject>
+			<imageobject>
+				<!-- logo 변경 -->
+				<imagedata fileref="../image/common/logo_pdf.jpg" />
+			</imageobject>
+		</mediaobject>
+		<legalnotice>
+			<para>
+			Copyright of this document belongs to Samsung SDS and it is free to use for the purpose of Anyframe Open Source Community Activities.
+			In the case of copying and distributing this document, please notify the copyright holder.
+			In the case of changing the document, please notify us of the changed contents between the original and adjusted document. 
+			Commercial usage of the adjusted document is not allowed.
+			In the case of finding an error in this document, please register it as issue for further corrective action. 
+
+			</para>
+		</legalnotice>
+	</bookinfo>
+	 <part id="monitoring">
+        <title>Anyframe Monitoring Tool</title>
+        <partintro><para>
+			Anyframe provides a Monitoring Tool collecting data for measuring performance 
+			with Aspect and reporting data analysis result based on InfraRED. 
+			InfraRED is an open source for monitoring JavaEE based application performance. 
+			Next, looked into are installation of and how to use Monitoring Tool. 
+        </para></partintro>
+                &monitoring_introduction;
+                &monitoring_installation;
+                &monitoring_configuration;
+                &monitoring_views;
+             
+    </part>
+</book>
