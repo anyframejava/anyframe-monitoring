@@ -30,6 +30,8 @@ Monitoring Tool이 정상적으로 실행되었는지 확인하는 방법에 대
 3. 브라우저 주소창에 http://localhost:8080/anyframe.tools.monitoring-1.0.0 을 입력하고, Anyframe Monitoring Tool 화면이 뜨는지 확인한다.
 4. Anyframe Monitoring Tool의 좌측 상단 SELECT APPLICATION을 선택하였을 때, 모니터링 대상 어플리케이션을 선택할 수 있는 팝업창이 뜬다. 모니터링 대상 어플리케이션이 아직 실행되지 않았으므로 어플리케이션 목록이 조회되지 않을 것이다.
 
+![](README_image/monitoring_test.jpg)
+
 그림은 Anyframe Monitoring Tool이 정상적으로 시작되었을 때, 보여지는 웹화면입니다.  Anyframe Java MonitoringTool 웹화면에서 좌측 상단에 위치한 SELECT APPLICATION을 선택하였을 때, 모니터링 대상이 되는 어플리케이션을 선택할 수 있도록 팝업창이 뜬다. 모니터링 대상 어플리케이션이 아직 실행되지 않은 경우에는 어플리케이션 목록이 조회되지 않을 것이다.
 
 ##### 테스트 모니터링
@@ -37,6 +39,8 @@ Sample 웹 어플리케이션을 설치한 후 모니터링이 정상적으로 �
 
 1. Anyframe Monitoring Tool의 좌측 상단 SELECT APPLICATION을 선택하였을 때, 사용자의 컴퓨터 이름과 어플리케이션 이름이 나타나는 것을 알 수 있다.
 2. 해당되는 어플리케이션을 선택하고 OK 버튼을 클릭하면 모니터링 결과를 확인할 수 있게 된다.
+
+![](README_image/monitoring_select.jpg)
 
 단, 모니터링 대상 어플리케이션이 참조하는 클래스패스에 infrared-agent-all-servlet-x.x.x.jar 파일이 추가되어 있어야 함에 유의해야 한다. infrared-agent-all-servlet-x.x.x.jar은 anyframe.tools.monitoring.agent-x.x.x.zip 파일 내에 포함되어 있다.
 
@@ -46,4 +50,4 @@ Sample 웹 어플리케이션을 설치한 후 모니터링이 정상적으로 �
 ##### 리소스
 Monitoring Tool은 오픈 소스 프로젝트 Infrared 2.4.1 Beta의 UI를 GWT로 개선을 하면서 메모리 누수와 관련된 버그를 Fix하였다.
 
-[Infrared 2.4.1 Beta] (http://infrared.sourceforge.net/versions/latest/)
+* [Infrared 2.4.1 Beta] (http://infrared.sourceforge.net/versions/latest/)
